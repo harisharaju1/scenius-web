@@ -1,19 +1,16 @@
-import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react'
+import { CSSReset, ThemeProvider } from "@chakra-ui/react";
+import { withUrqlClient } from "next-urql";
+import { Provider } from "urql";
+import theme from "../theme";
+import { createUrqlClient } from "../utils/createUrqlClient";
 
-import theme from '../theme'
-
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: any) {
   return (
-    <ChakraProvider resetCSS theme={theme}>
-      <ColorModeProvider
-        options={{
-          useSystemColorMode: true,
-        }}
-      >
-        <Component {...pageProps} />
-      </ColorModeProvider>
-    </ChakraProvider>
-  )
+    <ThemeProvider theme={theme}>
+      <CSSReset />
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
 }
 
-export default MyApp
+export default withUrqlClient(createUrqlClient)(MyApp);
