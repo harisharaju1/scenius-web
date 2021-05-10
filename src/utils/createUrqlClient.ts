@@ -1,4 +1,4 @@
-import { dedupExchange, fetchExchange } from "urql";
+import { dedupExchange, fetchExchange, errorExchange } from "urql";
 import { cacheExchange } from "@urql/exchange-graphcache";
 import {
   LogoutMutation,
@@ -8,6 +8,7 @@ import {
   RegisterMutation,
 } from "../generated/graphql";
 import { betterUpdateQuery } from "./betterUpdateQuery";
+import Router from "next/router";
 
 export const createUrqlClient = (ssrExchange: any) => ({
   url: "http://localhost:4000/graphql",
@@ -69,6 +70,25 @@ export const createUrqlClient = (ssrExchange: any) => ({
       },
     }),
     ssrExchange,
+    errorExchange({
+      onError(error) {
+        if (error?.message.includes("not authenticated")) {
+          Router.replace("/login");
+        }
+        console.error(error);
+      },
+    }),
     fetchExchange,
   ],
 });
+function pipe(arg0: any, arg1: any) {
+  throw new Error("Function not implemented.");
+}
+
+function tap(arg0: { error: any }): any {
+  throw new Error("Function not implemented.");
+}
+
+function sentryFireAndForgetHere() {
+  throw new Error("Function not implemented.");
+}
