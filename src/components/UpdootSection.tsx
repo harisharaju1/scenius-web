@@ -1,8 +1,12 @@
-import React, { useState } from "react";
-import { Flex } from "@chakra-ui/react";
-import { IconButton } from "@chakra-ui/react";
+import { ApolloCache, gql } from "@apollo/client";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import { PostSnippetFragment, useVoteMutation } from "../generated/graphql";
+import { Flex, IconButton } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  PostSnippetFragment,
+  useVoteMutation,
+  VoteMutation,
+} from "../generated/graphql";
 
 interface UpdootSectionProps {
   post: PostSnippetFragment;

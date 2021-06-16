@@ -8,8 +8,11 @@ import { Wrapper } from "../../components/Wrapper";
 import { useChangePasswordMutation } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import NextLink from "next/link";
+import { withApollo } from "../../utils/withApollo";
+import { withUrqlClient } from "next-urql";
+import { createUrqlClient } from "../../utils/createUrqlClient";
 
-const ChangePassword: NextPage<{ token: string }> = () => {
+const ChangePassword: NextPage = () => {
   const router = useRouter();
   const [, changePassword] = useChangePasswordMutation();
   const [tokenError, setTokenError] = useState("");
@@ -66,4 +69,4 @@ const ChangePassword: NextPage<{ token: string }> = () => {
   );
 };
 
-export default ChangePassword;
+export default withUrqlClient(createUrqlClient)(ChangePassword);

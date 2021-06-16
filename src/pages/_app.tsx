@@ -1,16 +1,14 @@
-import { CSSReset, ThemeProvider } from "@chakra-ui/react";
-import { withUrqlClient } from "next-urql";
-import { Provider } from "urql";
+import { ChakraProvider, CSSReset } from "@chakra-ui/react";
+import React from "react";
 import theme from "../theme";
-import { createUrqlClient } from "../utils/createUrqlClient";
 
 function MyApp({ Component, pageProps }: any) {
   return (
-    <ThemeProvider theme={theme}>
+    <ChakraProvider theme={theme}>
       <CSSReset />
       <Component {...pageProps} />
-    </ThemeProvider>
+    </ChakraProvider>
   );
 }
 
-export default withUrqlClient(createUrqlClient)(MyApp);
+export default MyApp;

@@ -7,6 +7,7 @@ import { Layout } from "../components/Layout";
 import { useCreatePostMutation } from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { useIsAuth } from "../utils/useIsAuth";
+// import { withApollo } from "../utils/withApollo";
 
 const CreatePost: React.FC<{}> = ({}) => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const CreatePost: React.FC<{}> = ({}) => {
     <Layout variant="small">
       <Formik
         initialValues={{ title: "", text: "" }}
-        onSubmit={async (values, { setErrors }) => {
+        onSubmit={async (values) => {
           const { error } = await createPost({ input: values });
           if (!error) {
             router.push("/");
@@ -38,7 +39,6 @@ const CreatePost: React.FC<{}> = ({}) => {
               mt={4}
               isLoading={isSubmitting}
               type="submit"
-              InputOrTextarea
               colorScheme="twitter"
             >
               Create Post
